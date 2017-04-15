@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     
-    <changeSet id="1" author="amo">
+    <changeSet id="1" author="anja">
         <createTable tableName="character">
             <column name="id" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -35,17 +35,7 @@
             <column name="combatactive" type="boolean" defaultValueBoolean="false"/>   
         </createTable>
     </changeSet>
-    <changeSet id="2" author="amo">
-        <createTable tableName="chapter">
-            <column name="id" type="varchar(50)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet id="3" author="amo">
+    <changeSet id="2" author="anja">
         <createTable tableName="adventure">
             <column name="id" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -55,7 +45,20 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="4" author="amo">
+    <changeSet id="3" author="anja">
+        <createTable tableName="chapter">
+            <column name="id" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_adventure" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="anja">
         <createTable tableName="setting">
             <column name="id" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -66,7 +69,7 @@
             <column name="img" type="varchar(50)"></column>
         </createTable>
     </changeSet>
-    <changeSet id="5" author="amo">
+    <changeSet id="5" author="anja">
         <createTable tableName="event">
             <column name="id" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -76,7 +79,17 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="6" author="amo">
+    <changeSet id="6" author="anja">
+        <createTable tableName="keyword">
+            <column name="id" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="7" author="anja">
         <createTable tableName="chapter_setting">
             <column name="id_chapter" type="varchar(50)">
                 <constraints nullable="false"/>
@@ -86,7 +99,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="7" author="amo">
+    <changeSet id="8" author="anja">
         <createTable tableName="setting_event">
             <column name="id_setting" type="varchar(50)">
                 <constraints nullable="false"/>
@@ -96,7 +109,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="8" author="amo">
+    <changeSet id="9" author="anja">
         <createTable tableName="setting_character">
             <column name="id_setting" type="varchar(50)">
                 <constraints nullable="false"/>
@@ -106,7 +119,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="9" author="amo">
+    <changeSet id="10" author="anja">
         <createTable tableName="event_character">
             <column name="id_event" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -116,4 +129,35 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="11" author="anja">
+        <createTable tableName="keyword_character">
+            <column name="id_keyword" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_character" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="12" author="anja">
+        <createTable tableName="keyword_setting">
+            <column name="id_keyword" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_setting" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="13" author="anja">
+    <addForeignKeyConstraint baseColumnNames="id_adventure"
+            baseTableName="chapter"
+            constraintName="fk_adventure_chapter"
+            deferrable="false"
+            initiallyDeferred="false"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+            referencedColumnNames="id"
+            referencedTableName="adventure"/>
+	</changeSet>
 </databaseChangeLog>
